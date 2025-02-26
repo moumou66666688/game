@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/threeMaze/SC Demo.unity
     guid: 86e89bd9e4a9c5245a015cf17e3c0aae
+  - enabled: 1
+    path: Assets/Scenes/two s/two0.unity
+    guid: 43d0b71285e812542acf9bb20b2fa826
+  - enabled: 1
+    path: Assets/Scenes/two s/two.unity
+    guid: ed4fbc8a3909b8b4b8cde03a7b632ee8
   m_configObjects: {}
