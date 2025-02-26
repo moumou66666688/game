@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-
+//背景滚动
 public class Parallax : MonoBehaviour
 {
-    public float animationSpeed = 1f;
+    public float animationSpeed = 0f;
     private MeshRenderer meshRenderer;
 
     private void Awake()

@@ -310,7 +310,7 @@ MonoBehaviour:
   top: {fileID: 6053768794093319263}
   bottom: {fileID: 6053768793515663630}
   speed: 5
-  gap: 3
+  gap: 4
 --- !u!1 &7818968135391167135
 GameObject:
   m_ObjectHideFlags: 0

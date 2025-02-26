@@ -16,16 +16,20 @@ public class GameManager0 : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) {
+        if (Instance != null)
+        {
             DestroyImmediate(gameObject);
-        } else {
+        }
+        else
+        {
             Instance = this;
         }
     }
 
     private void OnDestroy()
     {
-        if (Instance == this) {
+        if (Instance == this)
+        {
             Instance = null;
         }
     }
@@ -53,10 +57,12 @@ public class GameManager0 : MonoBehaviour
         player.enabled = true;
 
         Pipes[] pipes = FindObjectsOfType<Pipes>();
-
-        for (int i = 0; i < pipes.Length; i++) {
+        for (int i = 0; i < pipes.Length; i++)
+        {
             Destroy(pipes[i].gameObject);
         }
+
+        spawner.Reset();  // 调用Spawner的重置方法
     }
 
     public void GameOver()
@@ -72,5 +78,4 @@ public class GameManager0 : MonoBehaviour
         score++;
         scoreText.text = score.ToString();
     }
-
 }

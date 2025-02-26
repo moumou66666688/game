@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-
+//管道移动
 public class Pipes : MonoBehaviour
 {
     public Transform top;
     public Transform bottom;
     public float speed = 5f;
-    public float gap = 3f;
+    public float gap = 4f;
 
     private float leftEdge;
 
@@ -20,7 +20,8 @@ public class Pipes : MonoBehaviour
     {
         transform.position += speed * Time.deltaTime * Vector3.left;
 
-        if (transform.position.x < leftEdge) {
+        if (transform.position.x < leftEdge)
+        {
             Destroy(gameObject);
         }
     }

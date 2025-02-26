@@ -31,10 +31,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
-            direction = Vector3.up * strength;
-        }
-
         // Apply gravity and update the position
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
@@ -45,26 +41,36 @@ public class Player : MonoBehaviour
         transform.eulerAngles = rotation;
     }
 
+    // 新增公共方法，用于按钮点击时触发跳跃
+    public void Jump()
+    {
+        direction = Vector3.up * strength;  // 设置方向为向上跳跃
+    }
+
     private void AnimateSprite()
     {
         spriteIndex++;
 
-        if (spriteIndex >= sprites.Length) {
+        if (spriteIndex >= sprites.Length)
+        {
             spriteIndex = 0;
         }
 
-        if (spriteIndex < sprites.Length && spriteIndex >= 0) {
+        if (spriteIndex < sprites.Length && spriteIndex >= 0)
+        {
             spriteRenderer.sprite = sprites[spriteIndex];
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Obstacle")) {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
             GameManager0.Instance.GameOver();
-        } else if (other.gameObject.CompareTag("Scoring")) {
+        }
+        else if (other.gameObject.CompareTag("Scoring"))
+        {
             GameManager0.Instance.IncreaseScore();
         }
     }
-
 }
