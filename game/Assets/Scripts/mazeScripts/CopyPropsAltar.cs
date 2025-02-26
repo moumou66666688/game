@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,11 @@ using UnityEngine;
 namespace Cainos.PixelArtTopDown_Basic
 {
 
-    public class PropsAltar : MonoBehaviour
+    public class CopyPropsAltar : MonoBehaviour
     {
         public List<SpriteRenderer> runes;
         public float lerpSpeed;
+        private bool state = false;
 
         private Color curColor;
         private Color targetColor;
@@ -21,12 +22,13 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("显示为进入");
             targetColor.a = 1.0f;
-            if (collectManager.Instance.collecteFinish)
+            ///collectManager.Instance.jitan2 = true;
+            if (collectManager.Instance.collecteFinish && collectManager.Instance.jitan1)
             {
                 collectManager.Instance.exitDoorPrefab.SetActive(true);
-                Debug.Log("成功显示");
+                Debug.Log("�ɹ���ʾ");
+                state = true;
 
 
             }
@@ -36,6 +38,7 @@ namespace Cainos.PixelArtTopDown_Basic
         {
             targetColor.a = 0.0f;
             collectManager.Instance.exitDoorPrefab.SetActive(false);
+            //collectManager.Instance.jitan2 = false;
         }
 
         private void Update()
@@ -46,7 +49,7 @@ namespace Cainos.PixelArtTopDown_Basic
             {
                 r.color = curColor;
             }
-            
+            Debug.Log("״̬��" + state);
         }
     }
 }

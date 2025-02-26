@@ -2,17 +2,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Tilemaps;
 //collectManager
 //countMember
 public class collectManager : MonoBehaviour
 {
     public static collectManager Instance;
 
-    [SerializeField] private Text fragmentCountText;
+    [SerializeField] public Text fragmentCountText;
     //第x个是否被收集
     private Dictionary<string, bool> collectedFragments = new Dictionary<string, bool>();
+    public bool collecteFinish = false;
 
     private List<countMember> allFragments = new List<countMember>();
+
+    public  bool jitan1=false ;
+    // public bool jitan2 =false;
+
+    //收集完毕大门生成
+    [SerializeField] public GameObject exitDoorPrefab;
+    
 
     void Awake()
     {
@@ -30,6 +39,7 @@ public class collectManager : MonoBehaviour
     void Start()
     {
         InitializeFragments();
+        exitDoorPrefab.SetActive(false);
     }
 
     // 初始化所有碎片
@@ -73,10 +83,13 @@ public class collectManager : MonoBehaviour
         //统计几个collect了，然后show
         int collected = collectedFragments.Values.Count(v => v);
         fragmentCountText.text = $"{collected}/{allFragments.Count}";
-        Debug.Log("展示现在的碎片文本："+fragmentCountText.text);//
+        Debug.Log("展示现在的碎片文本："+fragmentCountText.text);
+        if (fragmentCountText.text == "4/4") collecteFinish = true;
         //捡到播放
         //GetComponent<AudioSource>().Play();
         
+
+
     }
 
     // 收集碎片
@@ -111,6 +124,9 @@ public class collectManager : MonoBehaviour
     }
     private void Update()
     {
-        //Debug.Log("展示：" + fragmentCountText.text);
+        
+        
     }
+  
+
 }
