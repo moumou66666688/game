@@ -21,21 +21,14 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("显示为进入");
             targetColor.a = 1.0f;
-            if (collectManager.Instance.collecteFinish)
-            {
-                collectManager.Instance.exitDoorPrefab.SetActive(true);
-                Debug.Log("成功显示");
-
-
-            }
+            
+            
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             targetColor.a = 0.0f;
-            collectManager.Instance.exitDoorPrefab.SetActive(false);
         }
 
         private void Update()

@@ -3,25 +3,30 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Tilemaps;
-//collectManager
-//countMember
+
 public class collectManager : MonoBehaviour
 {
     public static collectManager Instance;
 
     [SerializeField] public Text fragmentCountText;
-    //第x个是否被收集
     private Dictionary<string, bool> collectedFragments = new Dictionary<string, bool>();
     public bool collecteFinish = false;
 
     private List<countMember> allFragments = new List<countMember>();
 
-    public  bool jitan1=false ;
-    // public bool jitan2 =false;
+    public bool jitan1 = false;
 
-    //收集完毕大门生成
+    // 收集完毕大门生成
     [SerializeField] public GameObject exitDoorPrefab;
-    
+
+    // 添加对TilemapNavigator的引用
+    private TilemapNavigator navigator;
+
+    // 添加玩家引用
+    private Transform playerTransform;
+
+    //最近的路径
+    private List<Vector2Int> lastPath = new List<Vector2Int>();
 
     void Awake()
     {
@@ -38,6 +43,24 @@ public class collectManager : MonoBehaviour
 
     void Start()
     {
+        // 初始化玩家位置
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
+        else
+        {
+            Debug.LogError("未找到玩家对象！");
+        }
+
+        // 初始化TilemapNavigator
+        navigator = FindObjectOfType<TilemapNavigator>();
+        if (navigator == null)
+        {
+            Debug.LogError("未找到TilemapNavigator组件！");
+        }
+
         InitializeFragments();
         exitDoorPrefab.SetActive(false);
     }
@@ -79,25 +102,67 @@ public class collectManager : MonoBehaviour
             Debug.LogError("allFragments 未初始化！");
             return;
         }
-        
-        //统计几个collect了，然后show
+
+        // 统计已收集的碎片数量
         int collected = collectedFragments.Values.Count(v => v);
         fragmentCountText.text = $"{collected}/{allFragments.Count}";
-        Debug.Log("展示现在的碎片文本："+fragmentCountText.text);
-        if (fragmentCountText.text == "4/4") collecteFinish = true;
-        //捡到播放
-        //GetComponent<AudioSource>().Play();
-        
+        Debug.Log("展示现在的碎片文本：" + fragmentCountText.text);
 
 
+        if (fragmentCountText.text == "1/4")
+        {
+            Debug.Log("运行测试发现路径");
+            TestFindPath();
+
+                exitDoorPrefab.SetActive(true);
+                collecteFinish = true;  // 标记为收集完毕，启动实时指导
+            
+
+        }
     }
+    private void TestFindPath()
+    {
+        if (playerTransform == null)
+        {
+            Debug.LogError("PlayerTransform 还没初始化！");
+            return;
+        }
+
+        // 取玩家当前位置作为起点（网格坐标）
+        Vector2Int startPos = new Vector2Int(
+            Mathf.RoundToInt(playerTransform.position.x),
+            Mathf.RoundToInt(playerTransform.position.y)
+        );
+
+        // 让玩家走到的目标点（网格坐标）
+        // 这里随便举例 (5,5)
+        Vector2Int endPos = new Vector2Int(-9, -6);
+        Debug.Log("起点和终点的坐标" + startPos + " " + endPos);
+
+        // AStarMgr.Instance.FindPath 是你自己的AStar逻辑
+        List<Vector2Int> path = AStarMgr.Instance.FindPath(startPos, endPos);
+
+        if (path.Count > 0)
+        {
+            Debug.Log($"寻路成功，点数：{path.Count}");
+        }
+        else
+        {
+            Debug.LogWarning("寻路失败或没有路径可走。");
+        }
+
+        // 把结果保存一下，供 OnDrawGizmos() 绘制
+        lastPath = path;
+    }
+
+
+
 
     // 收集碎片
     public void CollectFragment(string id)
     {
         Debug.Log("收集id:" + id);
-        
-        
+
         if (!collectedFragments.ContainsKey(id))
         {
             collectedFragments[id] = true; // 标记为已收集
@@ -122,11 +187,19 @@ public class collectManager : MonoBehaviour
         }
         InitializeFragments();
     }
-    private void Update()
-    {
-        
-        
-    }
-  
 
+    private void OnDrawGizmos()
+    {
+        if (lastPath == null || lastPath.Count < 2) return;
+
+        Gizmos.color = Color.blue;
+
+        // 假设网格坐标与世界坐标一致，如有偏移/缩放要改成 tilemap 的转换
+        for (int i = 0; i < lastPath.Count - 1; i++)
+        {
+            Vector3 startWorldPos = new Vector3(lastPath[i].x, lastPath[i].y, 0);
+            Vector3 endWorldPos = new Vector3(lastPath[i + 1].x, lastPath[i + 1].y, 0);
+            Gizmos.DrawLine(startWorldPos, endWorldPos);
+        }
+    }
 }
