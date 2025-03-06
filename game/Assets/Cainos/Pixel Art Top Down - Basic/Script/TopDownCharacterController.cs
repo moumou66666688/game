@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
 
 namespace Cainos.PixelArtTopDown_Basic
 {
@@ -10,6 +12,12 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private Animator animator;
 
+
+        //
+        public TilemapNavigator navigator;
+        public Transform target;
+        private List<Vector3> currentPath;
+
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -18,6 +26,8 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void Update()
         {
+            
+
             Vector2 dir = Vector2.zero;
             if (Input.GetKey(KeyCode.A))
             {
@@ -63,6 +73,17 @@ namespace Cainos.PixelArtTopDown_Basic
             {
                 Debug.Log($"AudioSource 状态：{GetComponent<AudioSource>().isActiveAndEnabled}");
                 //Debug.Log("没有音效");
+            }
+        }
+        void OnDrawGizmos()
+        {
+            if (currentPath != null)
+            {
+                Gizmos.color = Color.blue;
+                foreach (var point in currentPath)
+                {
+                    Gizmos.DrawSphere(point, 0.2f);
+                }
             }
         }
     }

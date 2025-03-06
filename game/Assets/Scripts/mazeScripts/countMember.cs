@@ -11,6 +11,8 @@ public class countMember : MonoBehaviour
 
     private bool isCollected = false;
 
+    
+
     void Start()
     {
         //检查是否收集
