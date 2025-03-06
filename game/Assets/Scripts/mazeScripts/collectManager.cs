@@ -3,9 +3,18 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Tilemaps;
+using Unity.VisualScripting;
+
 
 public class collectManager : MonoBehaviour
 {
+    //public Image arrowImage;
+    public int currentPanelIndex = -1;  // 记录当前显示的面板，-1表示目前没显示任何面板
+
+    [SerializeField] private Button button;
+    [SerializeField] private GameObject[] panles;
+    
+
     public static collectManager Instance;
 
     [SerializeField] public Text fragmentCountText;
@@ -43,6 +52,17 @@ public class collectManager : MonoBehaviour
 
     void Start()
     {
+        //arrowImage.gameObject.SetActive(false);
+        for (int i = 0; i <panles.Length; i++)
+        {
+            panles[i].SetActive(false);
+        }
+        button.onClick.AddListener(ClosePanelAndButton);
+        button.gameObject.SetActive(false);
+        Debug.Log(button);
+        Debug.Log(panles[0]);
+        
+
         // 初始化玩家位置
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -63,7 +83,23 @@ public class collectManager : MonoBehaviour
 
         InitializeFragments();
         exitDoorPrefab.SetActive(false);
+        Debug.Log("门关闭");
     }
+    public void ClosePanelAndButton()
+    {
+        // 如果 currentPanelIndex 有效，就只关闭这个面板
+        if (currentPanelIndex >= 0 && currentPanelIndex < panles.Length)
+        {
+            panles[currentPanelIndex].SetActive(false);
+        }
+        // 隐藏按钮
+        button.gameObject.SetActive(false);
+
+        // 如果你也想重置 currentPanelIndex:
+        currentPanelIndex = -1;
+    }
+
+
 
     // 初始化所有碎片
     public void InitializeFragments()
@@ -109,14 +145,39 @@ public class collectManager : MonoBehaviour
         Debug.Log("展示现在的碎片文本：" + fragmentCountText.text);
 
 
-        if (fragmentCountText.text == "1/4")
+        if (collected == 1)
         {
+            Debug.Log("开启panel1");
+            currentPanelIndex = 0;
+            panles[currentPanelIndex].SetActive(true);
+            button.gameObject.SetActive(true);
+        }
+        if (collected == 2)
+        {
+
+            currentPanelIndex = 1;
+            panles[currentPanelIndex].SetActive(true);
+            button.gameObject.SetActive(true);
+        }
+        if (collected == 3)
+        {
+
+            currentPanelIndex = 2;
+            panles[currentPanelIndex].SetActive(true);
+            button.gameObject.SetActive(true);
+        }
+        if (collected == 4)
+        {
+
+            currentPanelIndex = 3;
+            panles[currentPanelIndex].SetActive(true);
+            button.gameObject.SetActive(true);
             Debug.Log("运行测试发现路径");
+           // arrowImage.gameObject.SetActive(true);
             TestFindPath();
 
-                exitDoorPrefab.SetActive(true);
-                collecteFinish = true;  // 标记为收集完毕，启动实时指导
-            
+            exitDoorPrefab.SetActive(true);
+            collecteFinish = true;  // 标记为收集完毕，启动实时指导
 
         }
     }
