@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Tilemaps;
-using Unity.VisualScripting;
 
 
 public class collectManager : MonoBehaviour
@@ -13,7 +11,7 @@ public class collectManager : MonoBehaviour
 
     [SerializeField] private Button button;
     [SerializeField] private GameObject[] panles;
-    
+
 
     public static collectManager Instance;
 
@@ -87,16 +85,23 @@ public class collectManager : MonoBehaviour
     }
     public void ClosePanelAndButton()
     {
+
+        if (currentPanelIndex == 4 && panles[5].activeSelf==true)
+        {
+            panles[5].SetActive(false);
+        }
+
         // 如果 currentPanelIndex 有效，就只关闭这个面板
-        if (currentPanelIndex >= 0 && currentPanelIndex < panles.Length)
+        if (currentPanelIndex >= 0 && currentPanelIndex <=3)
         {
             panles[currentPanelIndex].SetActive(false);
         }
+        
         // 隐藏按钮
         button.gameObject.SetActive(false);
 
-        // 如果你也想重置 currentPanelIndex:
-        currentPanelIndex = -1;
+        // 重置 currentPanelIndex:
+        //currentPanelIndex = -1;
     }
 
 
@@ -177,9 +182,13 @@ public class collectManager : MonoBehaviour
             TestFindPath();
 
             exitDoorPrefab.SetActive(true);
+            Debug.Log(exitDoorPrefab);
             collecteFinish = true;  // 标记为收集完毕，启动实时指导
+            //panles[currentPanelIndex + 2].SetActive(true);
+            //panles[currentPanelIndex + 1].SetActive(true);
 
         }
+        
     }
     private void TestFindPath()
     {
@@ -261,6 +270,20 @@ public class collectManager : MonoBehaviour
             Vector3 startWorldPos = new Vector3(lastPath[i].x, lastPath[i].y, 0);
             Vector3 endWorldPos = new Vector3(lastPath[i + 1].x, lastPath[i + 1].y, 0);
             Gizmos.DrawLine(startWorldPos, endWorldPos);
+        }
+    }
+    private void Update()
+    {
+        if (currentPanelIndex == 3 && panles[5].activeSelf == false && panles[3].activeSelf==false)
+        {
+            panles[5].SetActive(true);
+            button.gameObject.SetActive(true);
+            currentPanelIndex++;
+        }
+        if (currentPanelIndex == 4 && panles[5].activeSelf == false)
+        {
+            panles[4].SetActive(true);
+            currentPanelIndex++;
         }
     }
 }
