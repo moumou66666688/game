@@ -11,6 +11,9 @@ public class Buttons : MonoBehaviour
     public Button CloseButton;
     public Button ReturnButton;
 
+    public Slider volumeSlider;
+    public AudioSource bgMusicAudioSource;
+  
     private void Start()
     {
         TipsPanel.SetActive(false);
@@ -18,6 +21,11 @@ public class Buttons : MonoBehaviour
         Qbutton.onClick.AddListener(showTipsPanel);
         CloseButton.onClick.AddListener(closeTipPanel);
         ReturnButton.onClick.AddListener(Return);
+
+        volumeSlider.value = bgMusicAudioSource.volume;
+
+        // 监听 Slider 的值变化
+        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
     }
     void showTipsPanel()
     {
@@ -29,7 +37,13 @@ public class Buttons : MonoBehaviour
     }
     void Return()
     {
-        SceneManager.LoadScene(1);
+        Debug.Log("切换场景");
+        SceneManager.LoadScene("end");
+    }
+
+    private void OnVolumeChanged(float newVolume)
+    {
+        bgMusicAudioSource.volume = newVolume;
     }
 
 }
