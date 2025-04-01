@@ -1,18 +1,21 @@
-锘縰sing UnityEngine;
-//鑳屾櫙婊氬姩
+using UnityEngine;
+
 public class Parallax : MonoBehaviour
 {
-    public float animationSpeed = 0f;
-    private MeshRenderer meshRenderer;
+    public Transform cameraTransform;
+    public float parallaxEffect = 0.5f; // 视差系数，数值越小，背景移动越慢
 
-    private void Awake()
+    private Vector3 lastCameraPosition;
+
+    private void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        lastCameraPosition = cameraTransform.position;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        meshRenderer.material.mainTextureOffset += new Vector2(animationSpeed * Time.deltaTime, 0);
+        Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
+        transform.position += new Vector3(deltaMovement.x * parallaxEffect, 0, 0);
+        lastCameraPosition = cameraTransform.position;
     }
-
 }

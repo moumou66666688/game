@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - SiNan
+  - Obstacle
+  - Scoring
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -50,4 +53,19 @@ TagManager:
     locked: 0
   - name: Layer 3
     uniqueID: 4189426099
+    locked: 0
+  - name: Player
+    uniqueID: 3434979793
+    locked: 0
+  - name: UI_World
+    uniqueID: 2290535763
+    locked: 0
+  - name: Items
+    uniqueID: 2244195899
+    locked: 0
+  - name: Pipes
+    uniqueID: 3238420159
+    locked: 0
+  - name: Default
+    uniqueID: 2494645439
     locked: 0
