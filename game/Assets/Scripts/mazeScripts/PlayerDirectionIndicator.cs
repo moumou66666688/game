@@ -21,6 +21,7 @@ public class PlayerDirectionIndicator : MonoBehaviour
 
     void Start()
     {
+        arrowImage.gameObject.SetActive(false);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             playerTransform = player.transform;
@@ -35,7 +36,7 @@ public class PlayerDirectionIndicator : MonoBehaviour
     void Update()
     {
         bool isTargetWalkable = AStarMgr.Instance.tilemapNavigator.IsWalkable(targetGridPos.x, targetGridPos.y);
-        Debug.Log($"终点({targetGridPos.x},{targetGridPos.y})是否可走：{isTargetWalkable}");
+       // Debug.Log($"终点({targetGridPos.x},{targetGridPos.y})是否可走：{isTargetWalkable}");
         if (!isTargetWalkable)
         {
             // 这里可以进一步打印 nodeGrid 中对应坐标的信息
@@ -88,5 +89,6 @@ public class PlayerDirectionIndicator : MonoBehaviour
             // 如果找不到路径，可以选择隐藏或重置箭头
             // arrowImage.enabled = false;
         }
+        if (collectManager.Instance.currentPanelIndex == 3) arrowImage.gameObject.SetActive(true);
     }
 }

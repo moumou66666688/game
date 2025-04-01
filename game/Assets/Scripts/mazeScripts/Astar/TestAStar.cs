@@ -20,7 +20,7 @@ public class TestAStar : MonoBehaviour
             List<Vector2Int> path = AStarMgr.Instance.FindPath(startPos, targetPos);
             if (path.Count > 0)
             {
-                Debug.Log("寻路成功，路径点数：" + path.Count);
+                //Debug.Log("寻路成功，路径点数：" + path.Count);
                 // 你可以在这里让角色逐点移动，或者绘制 Gizmos
             }
             else
