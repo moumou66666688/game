@@ -6,18 +6,45 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/threeMaze/front.unity
-    guid: 987e8b7e74b9546458f0a8f76ade2b5f
+    path: Assets/Scenes/KaiChang/Main.unity
+    guid: 1213748cb720fae41a28bc31222b4ed3
   - enabled: 1
-    path: Assets/Scenes/threeMaze/SC Demo.unity
-    guid: 86e89bd9e4a9c5245a015cf17e3c0aae
+    path: Assets/Scenes/KaiChang/Book.unity
+    guid: d38c48a3387f17041af1f6f24031e46d
   - enabled: 1
-    path: Assets/Scenes/threeMaze/end.unity
-    guid: 1f71ccf601f407a4a8febfefe8cbe79f
+    path: Assets/Scenes/KaiChang/IntroScene.unity
+    guid: 7105fc358c48c38428b07e8fef034e40
   - enabled: 1
-    path: Assets/Scenes/two s/two.unity
-    guid: ed4fbc8a3909b8b4b8cde03a7b632ee8
+    path: Assets/Scenes/KaiChang/DialogueScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/two s/QUIT.unity
-    guid: cedb23cb33a86f74b82c56f4d1a736e4
+    path: Assets/Scenes/KaiChang/Map.unity
+    guid: 049a0adfb601df94d85c0d8f9028d707
+  - enabled: 1
+    path: Assets/Scenes/Oned/OneD.unity
+    guid: 08db0baa8f5e6e34195d7faac60ca892
+  - enabled: 1
+    path: Assets/Scenes/KaiChang/scene/Scene1.unity
+    guid: ea5d105ba536a9847afc2c4dfd86141f
+  - enabled: 1
+    path: Assets/Scenes/Oned/OneOD.unity
+    guid: 56f7426340ba73a4ba7686b395ac61ca
+  - enabled: 1
+    path: Assets/Scenes/Twod/TwoD.unity
+    guid: 566ef807c4d7078458d475fa14853165
+  - enabled: 1
+    path: Assets/Scenes/Twod/TwoOD.unity
+    guid: bb752b9e21fabfc4393bf13175e496cb
+  - enabled: 1
+    path: Assets/Scenes/Threed/ThreeD.unity
+    guid: d452aefcbb6ac1440bd2f89002b83a9a
+  - enabled: 1
+    path: Assets/Scenes/Threed/ThreeOD.unity
+    guid: ef75ed17f971d754c903f45b2f4cd71e
+  - enabled: 1
+    path: Assets/Scenes/JieShu/ShenKuo.unity
+    guid: d3d93bbfee2bddf4e9b6f0901ba44e03
+  - enabled: 1
+    path: Assets/Scenes/JieShu/Over.unity
+    guid: 696baa71591f5dd4db37e11692f4690c
   m_configObjects: {}

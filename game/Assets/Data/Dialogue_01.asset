@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8f9d1ee4c49234a8ef518c3fc72420, type: 3}
+  m_Name: Dialogue_01
+  m_EditorClassIdentifier: 
+  dialogues:
+  - speaker: "\u6C88\u62EC"
+    content: "\u201D\u5C0F\u5B50\uFF0C\u65E2\u7136\u8FD9\u6837\uFF0C\u4F60\u4E0D\u5982\u4EB2\u8EAB\u53BB\u4F53\u9A8C\u5427\uFF01\u201C"
+  - speaker: "\u5C11\u5E74"
+    content: "\"\u771F\u7684\u5417\uFF1F\u6211\u8981\u600E\u4E48\u505A\u5462\uFF1F\""
+  - speaker: "\u6C88\u62EC"
+    content: "\u201D\u53BB\u89E3\u51B3\u751F\u6D3B\u4E2D\u7684\u95EE\u9898\uFF0C\u8FD0\u7528\u68A6\u6EAA\u7B14\u8C08\u7684\u77E5\u8BC6\u3002\u201C"

@@ -8,6 +8,8 @@ TagManager:
   - Obstacle
   - Scoring
   - Item
+  - Ground
+  - ObstacleTrigger
   layers:
   - Default
   - TransparentFX
