@@ -16,7 +16,8 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive = false;
     private Coroutine typingCoroutine;
 
-    public float typingSpeed = 0.1f;
+    public float typingSpeed = 0.05f; // 控制每个字开始淡入的间隔
+    public float fadeInTime = 0.3f;   // 每个字淡入持续时间
 
     void Start()
     {
@@ -41,7 +42,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue()
     {
-        if (isDialogueActive) return;  // **避免重复调用**
+        if (isDialogueActive) return;  // 避免重复调用
         if (dialogueData == null || dialogueData.dialogues.Count == 0)
         {
             Debug.LogError("⚠️ 无有效对话数据！");
@@ -54,36 +55,10 @@ public class DialogueManager : MonoBehaviour
         ShowDialogue();
     }
 
-    //public void ShowDialogue()
-    //{
-    //    if (!isDialogueActive) return;  // 确保对话还在进行
-
-    //    // **如果对话已经全部播放完毕，直接结束**
-    //    if (currentIndex >= dialogueData.dialogues.Count)
-    //    {
-    //        EndDialogue();
-    //        return;
-    //    }
-
-    //    DialogueLine line = dialogueData.dialogues[currentIndex];
-    //    nameText.text = line.speaker;
-
-    //    // **确保 currentIndex++ 在协程前执行**
-    //    currentIndex++;
-
-    //    // 停止上一次的打字效果
-    //    if (typingCoroutine != null)
-    //    {
-    //        StopCoroutine(typingCoroutine);
-    //    }
-
-    //    typingCoroutine = StartCoroutine(TypeSentence(line.content));
-    //}
     public void ShowDialogue()
     {
-        if (!isDialogueActive) return;  // 确保对话还在进行
+        if (!isDialogueActive) return;
 
-        // **确保 currentIndex 在范围内**
         if (currentIndex >= dialogueData.dialogues.Count)
         {
             return;
@@ -92,16 +67,16 @@ public class DialogueManager : MonoBehaviour
         DialogueLine line = dialogueData.dialogues[currentIndex];
         nameText.text = line.speaker;
 
-        // **如果是第三句话（索引2），切换按钮**
-        if (currentIndex == 2)
+        // 切换按钮逻辑
+        if (currentIndex == 7)
         {
-            dialogueButton.gameObject.SetActive(false);   // 隐藏对话按钮
-            sceneTransitionButton.gameObject.SetActive(true);  // 显示场景切换按钮
+            dialogueButton.gameObject.SetActive(false);
+            sceneTransitionButton.gameObject.SetActive(true);
         }
 
-        currentIndex++;  // **索引递增**
+        currentIndex++;
 
-        // 停止上一次的打字效果
+        // 停止之前的协程
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
@@ -110,16 +85,37 @@ public class DialogueManager : MonoBehaviour
         typingCoroutine = StartCoroutine(TypeSentence(line.content));
     }
 
-
-
     IEnumerator TypeSentence(string sentence)
     {
-        dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        dialogueText.supportRichText = true;
+        nameText.supportRichText = true;
+
+        string speakerName = nameText.text;
+
+        float alpha = 0f;
+        float fadeInDuration = fadeInTime;
+
+        while (alpha < 1f)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            alpha += Time.deltaTime / fadeInDuration;
+            alpha = Mathf.Clamp01(alpha);
+
+            Color fadeColor = new Color(0f, 0f, 0f, alpha);
+            string hexColor = ColorUtility.ToHtmlStringRGBA(fadeColor);
+
+            // 整段对话文本淡入
+            dialogueText.text = $"<color=#{hexColor}>{sentence}</color>";
+
+            // 名字同步淡入
+            nameText.text = $"<color=#{hexColor}>{speakerName}</color>";
+
+            yield return null;
         }
+
+        // 确保完全显示（100%不透明）
+        string fullHex = ColorUtility.ToHtmlStringRGBA(new Color(0f, 0f, 0f, 1f));
+        dialogueText.text = $"<color=#{fullHex}>{sentence}</color>";
+        nameText.text = $"<color=#{fullHex}>{speakerName}</color>";
     }
 
     public void EndDialogue()
@@ -128,10 +124,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueButton.gameObject.SetActive(false);
         dialogueButton.interactable = false;
-        dialogueButton.onClick.RemoveAllListeners();  // **解绑点击事件**
+        dialogueButton.onClick.RemoveAllListeners();
         sceneTransitionButton.gameObject.SetActive(true);
     }
-
-
-
 }

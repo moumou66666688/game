@@ -12,6 +12,6 @@ public class SceneController : MonoBehaviour
 
     void LoadDialogueScene()
     {
-        SceneManager.LoadScene("DialogueScene"); // 确保对话场景名称正确
+        SceneManager.LoadScene("DuiHua"); // 确保对话场景名称正确
     }
 }

@@ -45,6 +45,6 @@ public class BookAnimation : MonoBehaviour
         yield return new WaitForSeconds(1.2f); // 等待遮罩完全覆盖后切换场景
 
         // 5. 切换场景
-        SceneManager.LoadScene("IntroScene");
+        SceneManager.LoadScene("SiNan");
     }
 }

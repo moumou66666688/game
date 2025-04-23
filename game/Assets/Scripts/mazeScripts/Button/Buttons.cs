@@ -38,7 +38,7 @@ public class Buttons : MonoBehaviour
     void Return()
     {
         Debug.Log("ÇÐ»»³¡¾°");
-        SceneManager.LoadScene("end");
+        SceneManager.LoadScene("TwoOD");
     }
 
     private void OnVolumeChanged(float newVolume)

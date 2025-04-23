@@ -8,9 +8,9 @@ public class ScoringZone : MonoBehaviour
     {
         if (!passed && collision.CompareTag("Player"))
         {
-            Debug.Log("触发器与 ");
+            Debug.Log("触发器 ");
             passed = true;
-            GameManager.Instance.AddScore(); // 加分
+            GameManagers.Instance.AddScore(); // 加分
 
         }
 

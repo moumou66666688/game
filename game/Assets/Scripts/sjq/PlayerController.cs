@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // 游戏结束后不能操作
-        if (!isMoving || GameManager.Instance == null || GameManager.Instance.IsGameOver()) return;
+        if (!isMoving || GameManagers.Instance == null || GameManagers.Instance.IsGameOver()) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         // **如果 Player 低于 -5f（超出屏幕），则触发失败**
         if (transform.position.y < -5f)
         {
-            GameManager.Instance.GameOver();
+            GameManagers.Instance.GameOver();
         }
     }
 
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            GameManager.Instance.GameOver();
+            GameManagers.Instance.GameOver();
         }
     }
 
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Ground"))
         {
-            GameManager.Instance.GameOver();
+            GameManagers.Instance.GameOver();
         }
     }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueLine
 {
-    public string speaker;  // 角色名字
-    public string content;  // 对话内容
+    public string speaker;
+    public string content;
 }
 
-[CreateAssetMenu(fileName = "NewDialogueData", menuName = "Dialogue/Dialogue Data")]
+[CreateAssetMenu(fileName = "New DialogueData", menuName = "Dialogue/DialogueData")]
 public class DialogueData : ScriptableObject
 {
-    public List<DialogueLine> dialogues = new List<DialogueLine>();
+    public List<DialogueLine> dialogues;
 }

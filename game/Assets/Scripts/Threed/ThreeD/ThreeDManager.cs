@@ -16,7 +16,8 @@ public class ThreeDManager : MonoBehaviour
     private bool isDialogueActive = false;
     private Coroutine typingCoroutine;
 
-    public float typingSpeed = 0.1f;
+    [Header("淡入时间（秒）")]
+    public float fadeInTime = 1.5f;  // 控制淡入速度
 
     void Start()
     {
@@ -33,15 +34,15 @@ public class ThreeDManager : MonoBehaviour
         }
 
         dialoguePanel.SetActive(true);
-        dialogueButton.gameObject.SetActive(true); // 初始显示对话按钮
-        sceneTransitionButton.gameObject.SetActive(false); // 初始隐藏切换场景按钮
+        dialogueButton.gameObject.SetActive(true);
+        sceneTransitionButton.gameObject.SetActive(false);
 
         StartDialogue();
     }
 
     public void StartDialogue()
     {
-        if (isDialogueActive) return;  // **避免重复调用**
+        if (isDialogueActive) return;
         if (dialogueData == null || dialogueData.dialogues.Count == 0)
         {
             Debug.LogError("⚠️ 无有效对话数据！");
@@ -54,36 +55,10 @@ public class ThreeDManager : MonoBehaviour
         ShowDialogue();
     }
 
-    //public void ShowDialogue()
-    //{
-    //    if (!isDialogueActive) return;  // 确保对话还在进行
-
-    //    // **如果对话已经全部播放完毕，直接结束**
-    //    if (currentIndex >= dialogueData.dialogues.Count)
-    //    {
-    //        EndDialogue();
-    //        return;
-    //    }
-
-    //    DialogueLine line = dialogueData.dialogues[currentIndex];
-    //    nameText.text = line.speaker;
-
-    //    // **确保 currentIndex++ 在协程前执行**
-    //    currentIndex++;
-
-    //    // 停止上一次的打字效果
-    //    if (typingCoroutine != null)
-    //    {
-    //        StopCoroutine(typingCoroutine);
-    //    }
-
-    //    typingCoroutine = StartCoroutine(TypeSentence(line.content));
-    //}
     public void ShowDialogue()
     {
-        if (!isDialogueActive) return;  // 确保对话还在进行
+        if (!isDialogueActive) return;
 
-        // **确保 currentIndex 在范围内**
         if (currentIndex >= dialogueData.dialogues.Count)
         {
             return;
@@ -92,34 +67,48 @@ public class ThreeDManager : MonoBehaviour
         ThreeDLine line = dialogueData.dialogues[currentIndex];
         nameText.text = line.speaker;
 
-        // **如果是第三句话（索引2），切换按钮**
         if (currentIndex == 3)
         {
-            dialogueButton.gameObject.SetActive(false);   // 隐藏对话按钮
-            sceneTransitionButton.gameObject.SetActive(true);  // 显示场景切换按钮
+            dialogueButton.gameObject.SetActive(false);
+            sceneTransitionButton.gameObject.SetActive(true);
         }
 
-        currentIndex++;  // **索引递增**
+        currentIndex++;
 
-        // 停止上一次的打字效果
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
         }
 
-        typingCoroutine = StartCoroutine(TypeSentence(line.content));
+        typingCoroutine = StartCoroutine(TypeSentence(line.content, line.speaker));
     }
 
-
-
-    IEnumerator TypeSentence(string sentence)
+    IEnumerator TypeSentence(string sentence, string speakerName)
     {
-        dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        dialogueText.supportRichText = true;
+        nameText.supportRichText = true;
+
+        float alpha = 0f;
+        float fadeInDuration = fadeInTime;
+
+        while (alpha < 1f)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            alpha += Time.deltaTime / fadeInDuration;
+            alpha = Mathf.Clamp01(alpha);
+
+            Color fadeColor = new Color(0f, 0f, 0f, alpha);
+            string hexColor = ColorUtility.ToHtmlStringRGBA(fadeColor);
+
+            dialogueText.text = $"<color=#{hexColor}>{sentence}</color>";
+            nameText.text = $"<color=#{hexColor}>{speakerName}</color>";
+
+            yield return null;
         }
+
+        // 确保100%不透明显示
+        string fullHex = ColorUtility.ToHtmlStringRGBA(new Color(0f, 0f, 0f, 1f));
+        dialogueText.text = $"<color=#{fullHex}>{sentence}</color>";
+        nameText.text = $"<color=#{fullHex}>{speakerName}</color>";
     }
 
     public void EndDialogue()
@@ -128,10 +117,7 @@ public class ThreeDManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueButton.gameObject.SetActive(false);
         dialogueButton.interactable = false;
-        dialogueButton.onClick.RemoveAllListeners();  // **解绑点击事件**
+        dialogueButton.onClick.RemoveAllListeners();
         sceneTransitionButton.gameObject.SetActive(true);
     }
-
-
-
 }

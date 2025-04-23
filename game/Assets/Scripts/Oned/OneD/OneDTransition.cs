@@ -77,6 +77,6 @@ public class OneDTransition : MonoBehaviour
         //yield return new WaitForSeconds(waitTime);
 
         // 切换场景
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("Onenmh");
     }
 }

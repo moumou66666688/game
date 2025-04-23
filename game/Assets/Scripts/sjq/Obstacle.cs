@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.GameOver(); // 触发游戏结束
+            GameManagers.Instance.GameOver(); // 触发游戏结束
         }
     }
 }

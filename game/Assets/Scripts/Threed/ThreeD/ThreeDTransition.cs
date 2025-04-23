@@ -33,8 +33,8 @@ public class ThreeDTransition : MonoBehaviour
         rightStartPos = rightCloud.anchoredPosition;
 
         // **计算目标位置（完全遮挡屏幕）**
-        leftTargetPos = new Vector2(-screenWidth / 2+960, leftStartPos.y);
-        rightTargetPos = new Vector2(screenWidth / 2-960, rightStartPos.y);
+        leftTargetPos = new Vector2(-screenWidth / 2 + 960, leftStartPos.y);
+        rightTargetPos = new Vector2(screenWidth / 2 - 960, rightStartPos.y);
 
         if (transitionButton != null)
         {
@@ -77,6 +77,6 @@ public class ThreeDTransition : MonoBehaviour
         //yield return new WaitForSeconds(waitTime);
 
         // 切换场景
-        SceneManager.LoadScene("threesjq0");
+        SceneManager.LoadScene("threesjq");
     }
 }

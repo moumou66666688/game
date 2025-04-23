@@ -24,7 +24,8 @@ public class DialogueManagerjieshu : MonoBehaviour
     private bool isDialogueActive = false;
     private Coroutine typingCoroutine;
 
-    public float typingSpeed = 0.1f;
+    [Header("淡入效果的持续时间")]
+    public float fadeInTime = 1.5f;
 
     void Start()
     {
@@ -75,7 +76,7 @@ public class DialogueManagerjieshu : MonoBehaviour
         DialogueLinejieshu line = dialogueData.dialogues[currentIndex];
         nameText.text = line.speaker;
 
-        if (currentIndex == 2)
+        if (currentIndex == 8)
         {
             dialogueButton.gameObject.SetActive(false);
             sceneTransitionButton.gameObject.SetActive(true);
@@ -86,17 +87,30 @@ public class DialogueManagerjieshu : MonoBehaviour
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        typingCoroutine = StartCoroutine(TypeSentence(line.content));
+        typingCoroutine = StartCoroutine(FadeInText(line.content));
     }
 
-    IEnumerator TypeSentence(string sentence)
+    IEnumerator FadeInText(string content)
     {
         dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        float alpha = 0f;
+        while (alpha < 1f)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            alpha += Time.deltaTime / fadeInTime;
+            alpha = Mathf.Clamp01(alpha);
+
+            // 计算每个字的透明度变化
+            Color fadeColor = new Color(0f, 0f, 0f, alpha);
+            string hexColor = ColorUtility.ToHtmlStringRGBA(fadeColor);
+
+            // 设置文本的颜色
+            dialogueText.text = $"<color=#{hexColor}>{content}</color>";
+            yield return null;
         }
+
+        // 最终设为完全不透明
+        string fullHex = ColorUtility.ToHtmlStringRGBA(new Color(0f, 0f, 0f, 1f));
+        dialogueText.text = $"<color=#{fullHex}>{content}</color>";
     }
 
     public void EndDialogue()
@@ -168,11 +182,41 @@ public class DialogueManagerjieshu : MonoBehaviour
     IEnumerator TypeFinalSentence(string sentence)
     {
         finalTransitionText.text = "";
+
+        // 先逐字显示（透明状态）
         foreach (char letter in sentence)
         {
-            finalTransitionText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            finalTransitionText.text += $"<color=#00000000>{letter}</color>"; // 黑色但完全透明
         }
+
+        // 然后整体淡入
+        float alpha = 0f;
+        while (alpha < 1f)
+        {
+            alpha += Time.deltaTime / fadeInTime;
+            alpha = Mathf.Clamp01(alpha);
+
+            string visibleText = "";
+            int visibleLength = Mathf.FloorToInt(alpha * sentence.Length);
+
+            // 已显示部分应用当前alpha（黑色）
+            Color fadeColor = new Color(0f, 0f, 0f, alpha);
+            string hexColor = ColorUtility.ToHtmlStringRGBA(fadeColor);
+
+            visibleText = $"<color=#{hexColor}>{sentence.Substring(0, visibleLength)}</color>";
+
+            // 剩余部分保持透明
+            if (visibleLength < sentence.Length)
+            {
+                visibleText += $"<color=#00000000>{sentence.Substring(visibleLength)}</color>";
+            }
+
+            finalTransitionText.text = visibleText;
+            yield return null;
+        }
+
+        // 最终显示（直接使用黑色文本）
+        finalTransitionText.text = sentence;
 
         yield return new WaitForSeconds(5f);
 
