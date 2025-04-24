@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//¿×Ã÷µÆ¿ØÖÆ
 public class PlayerController : MonoBehaviour
 {
     public float jumpForce = 5f;

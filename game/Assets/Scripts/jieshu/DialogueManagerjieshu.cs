@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogueManagerjieshu : MonoBehaviour
 {
@@ -215,17 +216,20 @@ public class DialogueManagerjieshu : MonoBehaviour
             yield return null;
         }
 
-        // 最终显示（直接使用黑色文本）
-        finalTransitionText.text = sentence;
+        //// 最终显示（直接使用黑色文本）
+        //finalTransitionText.text = sentence;
 
-        yield return new WaitForSeconds(5f);
+        //yield return new WaitForSeconds(5f);
 
-        if (textPanel != null)
-            textPanel.SetActive(false);
-        if (finalTransitionText != null)
-            finalTransitionText.gameObject.SetActive(false);
+        //if (textPanel != null)
+        //    textPanel.SetActive(false);
+        //if (finalTransitionText != null)
+        //    finalTransitionText.gameObject.SetActive(false);
 
-        if (warnPanel != null)
-            warnPanel.SetActive(true);
+        //if (warnPanel != null)
+        //    warnPanel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Over"); // 请确认 Over 场景已添加到 Build Settings 中
+
     }
 }

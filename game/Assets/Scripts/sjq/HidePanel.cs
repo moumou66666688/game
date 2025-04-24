@@ -1,8 +1,8 @@
 using UnityEngine;
-
+//Òþ²Øpanel
 public class HidePanel : MonoBehaviour
 {
-    public GameObject panel;  // ÐèÒªÒþ²ØµÄ Panel
+    public GameObject panel;  
 
     public void Hide()
     {

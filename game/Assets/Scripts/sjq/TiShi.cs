@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
+//提示panel
 public class TiShi : MonoBehaviour
 {
     public Text dialogueText;

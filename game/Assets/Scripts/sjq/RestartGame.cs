@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+//重新开始逻辑
 public class RestartGame : MonoBehaviour
 {
     public void Restart()

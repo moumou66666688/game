@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//ÉãÏñ»ú¸úËæ
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;

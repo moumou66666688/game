@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+//页面切换
 public class UIManager : MonoBehaviour
 {
     public GameObject startPanel;   // 开始界面

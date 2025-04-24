@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//±³¾°ÒÆ¶¯
 public class Parallax : MonoBehaviour
 {
     public Transform cameraTransform;

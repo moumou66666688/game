@@ -3,7 +3,7 @@ using UnityEngine;
 public class StringRippleEffect : MonoBehaviour
 {
     private bool isRippleActive = false;  // 防止重复点击
-    private float rippleSpeed = 20f;      // 波纹扩展速度（非常快速的扩展）
+   // private float rippleSpeed = 20f;      // 波纹扩展速度（非常快速的扩展）
     private float maxRadius = 4.5f;      // 增大波纹最大半径（放大波纹）
     private int numPoints = 100;          // 每个圆环的点数
     private float ringSpacing = 0.6f;     // 增加每个圆环之间的间隔，使波纹更大

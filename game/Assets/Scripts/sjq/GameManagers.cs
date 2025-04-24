@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // 引入UI命名空间
+using UnityEngine.UI; 
 using System.Collections; 
-
+//总逻辑
 public class GameManagers : MonoBehaviour
 {
     public static GameManagers Instance;
