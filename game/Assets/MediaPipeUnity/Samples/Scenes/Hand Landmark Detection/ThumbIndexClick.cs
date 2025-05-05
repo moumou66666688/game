@@ -8,10 +8,15 @@ using UnityEngine.UI; // 引入 UI 相关组件
 public class ThumbIndexClick : MonoBehaviour
 {
     [SerializeField] private HandLandmarkerRunner handLandmarkerRunner; // 拖拽绑定 HandLandmarkerRunner
-    [SerializeField] private float clickThreshold = 0.05f; // 距离阈值，单位是 NormalizedLandmark 的归一化坐标
+    [SerializeField] private float clickThreshold = 0.06f; // 距离阈值，单位是 NormalizedLandmark 的归一化坐标
     private bool isClicking = false;
 
     private PlayerController playerController; // PlayerController 引用
+
+    // 在 Inspector 中设置这三个 UI 面板引用
+    [SerializeField] private GameObject startMenu;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject victoryPanel;
 
     void Start()
     {
@@ -71,12 +76,19 @@ public class ThumbIndexClick : MonoBehaviour
     // 手势识别后触发的行为
     private void OnThumbIndexClick()
     {
-        Debug.Log("?? Thumb and Index close — trigger jump!");
+        // 使用 Inspector 设置的引用判断是否显示
+        if ((startMenu != null && startMenu.activeInHierarchy) ||
+            (gameOverUI != null && gameOverUI.activeInHierarchy) ||
+            (victoryPanel != null && victoryPanel.activeInHierarchy))
+        {
+            Debug.Log("UI Panel active, jump action blocked.");
+            return;
+        }
+
+        Debug.Log(" Thumb and Index close — trigger jump!");
         if (playerController != null)
         {
-            
-
-            playerController.Jump();  // 直接调用 PlayerController 的 Jump 方法
+            playerController.Jump();
             Debug.Log("Player jumped!");
         }
         else
