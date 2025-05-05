@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump()
+    public void Jump()
     {
         rb.velocity = new Vector2(moveSpeed, jumpForce);
     }
