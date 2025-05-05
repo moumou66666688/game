@@ -339,7 +339,7 @@ MonoBehaviour:
   rightCharacterImage: {fileID: 1806348301}
   dialogueBox: {fileID: 572696993}
   finalTransitionText: {fileID: 1135538029}
-  fadeInTime: 1.5
+  fadeInTime: 0.5
 --- !u!1 &276203771
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -624,8 +624,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52.705, y: -54.459}
-  m_SizeDelta: {x: 896.345, y: 198.075}
+  m_AnchoredPosition: {x: -52.705, y: -37.249}
+  m_SizeDelta: {x: 896.35, y: 232.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &572696993
 GameObject:

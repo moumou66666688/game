@@ -17,7 +17,7 @@ public class OneODManager : MonoBehaviour
     private Coroutine typingCoroutine;
 
     [Header("淡入持续时间")]
-    public float fadeInTime = 1.5f;
+    public float fadeInTime = 0.5f;
 
     void Start()
     {

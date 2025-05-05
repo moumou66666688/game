@@ -26,7 +26,7 @@ public class DialogueManagerjieshu : MonoBehaviour
     private Coroutine typingCoroutine;
 
     [Header("淡入效果的持续时间")]
-    public float fadeInTime = 1.5f;
+    public float fadeInTime = 0.5f;
 
     void Start()
     {

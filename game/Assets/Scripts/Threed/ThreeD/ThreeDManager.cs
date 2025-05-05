@@ -17,7 +17,7 @@ public class ThreeDManager : MonoBehaviour
     private Coroutine typingCoroutine;
 
     [Header("淡入时间（秒）")]
-    public float fadeInTime = 1.5f;  // 控制淡入速度
+    public float fadeInTime = 0.5f;  // 控制淡入速度
 
     void Start()
     {
