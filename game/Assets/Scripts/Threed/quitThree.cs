@@ -5,6 +5,6 @@ public class quitThree : MonoBehaviour
 {
     public void LoadSceneMap()
     {
-        SceneManager.LoadScene("threesjq0"); 
+        SceneManager.LoadScene("SJQ0"); 
     }
 }

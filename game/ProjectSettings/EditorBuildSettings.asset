@@ -33,9 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Two/TwoD.unity
     guid: 566ef807c4d7078458d475fa14853165
   - enabled: 1
-    path: Assets/Scenes/Two/threeMaze/front.unity
-    guid: 987e8b7e74b9546458f0a8f76ade2b5f
-  - enabled: 1
     path: Assets/Scenes/Two/threeMaze/SC Demo.unity
     guid: 86e89bd9e4a9c5245a015cf17e3c0aae
   - enabled: 1
@@ -45,8 +42,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Three/ThreeD.unity
     guid: d452aefcbb6ac1440bd2f89002b83a9a
   - enabled: 1
-    path: Assets/Scenes/Three/threesjq/threesjq0.unity
-    guid: 43d0b71285e812542acf9bb20b2fa826
+    path: Assets/Scenes/Three/threesjq/SJQ0.unity
+    guid: fafd5a72bd992f946847fffa01fe65de
   - enabled: 1
     path: Assets/Scenes/Three/threesjq/threesjq.unity
     guid: d07385ed43972e1489add3b4108a1dbf

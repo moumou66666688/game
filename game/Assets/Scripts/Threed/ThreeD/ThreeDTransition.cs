@@ -77,6 +77,6 @@ public class ThreeDTransition : MonoBehaviour
         //yield return new WaitForSeconds(waitTime);
 
         // 切换场景
-        SceneManager.LoadScene("threesjq");
+        SceneManager.LoadScene("SJQ0");
     }
 }

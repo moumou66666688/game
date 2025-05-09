@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour
         }
 
         // Ê¤ÀûÁ÷³Ì
-        ShowVictoryPanel();
-        EndGame();
+        // ShowVictoryPanel();
+        //EndGame();
     }
 
     private void ShowVictoryPanel()
@@ -117,8 +117,8 @@ public class GameManager : MonoBehaviour
             }
         }
         //if (stringIndex < stringObjects.Count)
-       // {
-            //stringObjects[stringIndex].GetComponent<StringClickHandler>().enabled = true;
+        // {
+        //stringObjects[stringIndex].GetComponent<StringClickHandler>().enabled = true;
         //}
         CheckVictory();
     }

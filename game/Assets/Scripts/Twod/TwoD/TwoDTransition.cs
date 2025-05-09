@@ -45,11 +45,6 @@ public class TwoDTransition : MonoBehaviour
 
     public void StartTransition()
     {
-        if (leftCloud == null || rightCloud == null)
-        {
-            Debug.LogError("StartTransition: 云朵未正确赋值！");
-            return;
-        }
         StartCoroutine(CloudMoveToCenter());
     }
 
@@ -57,7 +52,6 @@ public class TwoDTransition : MonoBehaviour
     {
         float elapsedTime = 0;
 
-        // **云朵向中间移动并重叠，遮住整个屏幕**
         while (elapsedTime < transitionTime)
         {
             elapsedTime += Time.deltaTime;
@@ -69,14 +63,11 @@ public class TwoDTransition : MonoBehaviour
             yield return null;
         }
 
-        // 确保云朵完全覆盖屏幕
-        leftCloud.anchoredPosition = leftTargetPos;
-        rightCloud.anchoredPosition = rightTargetPos;
+        // 停留一段时间（可选）
+        yield return new WaitForSeconds(waitTime);
 
-        // 停留一段时间
-        //yield return new WaitForSeconds(waitTime);
-
-        // 切换场景
-        SceneManager.LoadScene("front");
+        // 动画播放完成后再切换场景
+        SceneManager.LoadScene("SC Demo");
     }
+
 }

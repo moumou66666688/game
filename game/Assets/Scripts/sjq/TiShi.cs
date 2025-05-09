@@ -26,7 +26,7 @@ public class TiShi : MonoBehaviour
 
     IEnumerator PlayDialogueSequence()
     {
-        int maxLine = 4; // ✅ 设置最多播放几句
+        int maxLine = 7; // ✅ 设置最多播放几句
 
         for (int i = 0; i < Mathf.Min(dialogueLines.Length, maxLine); i++)
         {

@@ -29,8 +29,8 @@ public class CloudExitTransition : MonoBehaviour
         rightStartPos = rightCloud.anchoredPosition;
 
         // **计算目标位置（云朵完全散开）**
-        leftTargetPos = new Vector2(-screenWidth, leftStartPos.y);
-        rightTargetPos = new Vector2(screenWidth, rightStartPos.y);
+        leftTargetPos = new Vector2(-screenWidth*1.5f, leftStartPos.y);
+        rightTargetPos = new Vector2(screenWidth*1.5f, rightStartPos.y);
 
         // **进入场景时自动播放动画**
         StartCoroutine(CloudMoveToEdges());
