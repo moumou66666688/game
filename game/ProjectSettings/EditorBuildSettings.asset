@@ -42,9 +42,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Three/ThreeD.unity
     guid: d452aefcbb6ac1440bd2f89002b83a9a
   - enabled: 1
-    path: Assets/Scenes/Three/threesjq/SJQ0.unity
-    guid: fafd5a72bd992f946847fffa01fe65de
-  - enabled: 1
     path: Assets/Scenes/Three/threesjq/threesjq.unity
     guid: d07385ed43972e1489add3b4108a1dbf
   - enabled: 1
